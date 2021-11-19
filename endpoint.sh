@@ -12,9 +12,8 @@ echo "Starting ${GITHUB_WORKFLOW}:${GITHUB_ACTION}"
 # echo "INPUT_KEY: ${INPUT_KEY}"
 # echo "INPUT_RUN: ${INPUT_RUN}"
 
-CMD="${INPUT_RUN/$'\n'/'expect \'sftp>\''}"
-
-echo "Using password"
+CMD="send \"${INPUT_RUN/$'\n'/'\r\"\nexpect \'sftp>\'\nsend \"'}\""
+echo "Login and Executing $CMD"
 expect <<<EOD
 spawn "sftp -o Port=$INPUT_PORT $INPUT_USER@$INPUT_HOST"
 expect 'password:'
