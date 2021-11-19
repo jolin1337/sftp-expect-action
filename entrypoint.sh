@@ -16,7 +16,7 @@ CMD=${INPUT_RUN//$'\n'/$'\\r"\nexpect "sftp>"\nsend "'}
 CMD="send \"$CMD\""
 echo "Login and Executing $CMD"
 expect <<EOD
-spawn "sftp -o Port=$INPUT_PORT $INPUT_USER@$INPUT_HOST"
+spawn "sftp -P $INPUT_PORT $INPUT_USER@$INPUT_HOST"
 expect 'password:'
 send "$INPUT_PASS\r"
 expect "sftp>"
