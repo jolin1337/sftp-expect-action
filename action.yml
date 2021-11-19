@@ -1,0 +1,33 @@
+name: Expect sftp Github Action
+inputs:
+  host:
+    description: "sftp host"
+    required: true
+  port:
+    description: "sftp port"
+    required: false
+    default: 22
+  user:
+    description: "sftp username"
+    required: true
+  pass:
+    description: "sftp password"
+    required: false
+  run:
+    description: "sftp commands to run"
+    required: true
+
+description: 'sftp Github Action'
+branding:
+  icon: dollar-sign
+  color: gray-dark
+runs-on: ubuntu-18.04
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  env:
+    HOST: ${{ inputs.host }}
+    PORT: ${{ inputs.port }}
+    USER: ${{ inputs.user }}
+    PASS: ${{ inputs.pass }}
+    RUN: ${{ inputs.run }}
